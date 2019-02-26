@@ -15,3 +15,5 @@ struct Ray
 };
 
 typedef Ray<unsigned char> Ray_8b;
+typedef Ray<float> Ray_32b;
+typedef Ray<double> Ray_64b;

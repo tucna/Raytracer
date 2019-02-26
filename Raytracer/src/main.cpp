@@ -7,8 +7,22 @@
 using namespace std;
 
 template <typename T>
+bool hitSphere(const Vec3<T> center, float radius, const Ray<T> r)
+{
+    Vec3<T> oc = r.A - center;
+    float a = r.B.dot(r.B);
+    float b = 2.0 * oc.dot(r.B);
+    float c = oc.dot(oc) - radius * radius;
+    float discriminant = b * b - 4 * a * c;
+    return (discriminant > 0);
+}
+
+template <typename T>
 Vec3<T> color(const Ray<T>& r)
 {
+    if (hitSphere(Vec3<T>(0, 0, -1), 0.5, r))
+        return Vec3<T>(1, 0, 0);
+
     Vec3<T> unit_direction = r.B.normalized();
     float t = 0.5f * (unit_direction.y + 1.0f);
     return (1.0f - t) * Vec3<T>(1.0, 1.0, 1.0) + t * Vec3<T>(0.5f, 0.7f, 1.0f);
@@ -18,13 +32,13 @@ int main(int argc, char *argv[])
 {
     cout << "In progress..." << endl;
 
-    int width = 200;
-    int height = 100;
+    int width = 400;
+    int height = 200;
 
-    Vec3<float> lower_left_corner(-2.0, -1.0, -1.0);
-    Vec3<float> horizontal(4.0, 0.0, 0.0);
-    Vec3<float> vertical(0.0, 2.0, 0.0);
-    Vec3<float> origin(0.0, 0.0, 0.0);
+    Vec3_32b lower_left_corner(-2.0, -1.0, -1.0);
+    Vec3_32b horizontal(4.0, 0.0, 0.0);
+    Vec3_32b vertical(0.0, 2.0, 0.0);
+    Vec3_32b origin(0.0, 0.0, 0.0);
 
     Image image(width, height);
 
@@ -35,9 +49,10 @@ int main(int argc, char *argv[])
             float u = (float)x / width;
             float v = (float)y / height;
 
-            Ray<float> r(origin, lower_left_corner + u * horizontal + v * vertical);
-            Vec3<float> col = color(r);
+            Ray_32b r(origin, lower_left_corner + u * horizontal + v * vertical);
+            Vec3_32b col = color(r);
 
+            //image.setPixel(x, y, Vec3_8b(col));
             image.setPixel(x, y, Vec3_8b(255.99 * col.r, 255.99 * col.g, 255.99 * col.b));
         }
     }
