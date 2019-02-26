@@ -24,6 +24,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\image.h" />
+    <ClInclude Include="src\ray.h" />
     <ClInclude Include="src\stb_image_write.h" />
     <ClInclude Include="src\vec3.h" />
   </ItemGroup>

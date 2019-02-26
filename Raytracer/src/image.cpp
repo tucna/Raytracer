@@ -1,10 +1,9 @@
-#define _CRT_SECURE_NO_DEPRECATE
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#define STBI_MSC_SECURE_CRT
+#include "stb_image_write.h"
 
 #include "image.h"
 #include "vec3.h"
-
-#define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "stb_image_write.h"
 
 Image::Image(unsigned int width, unsigned int height, unsigned int channels) :
     _w(width),
@@ -19,7 +18,7 @@ Image::~Image()
     _pixels.clear();
 }
 
-void Image::SetPixel(int x, int y, const Vec3<unsigned char>& color)
+void Image::SetPixel(int x, int y, const Vec3_8b& color)
 {
     unsigned int index = (y * _w + x) * _ch;
 

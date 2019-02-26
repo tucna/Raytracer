@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "image.h"
+#include "ray.h"
 #include "vec3.h"
 
 using namespace std;
@@ -18,7 +19,7 @@ int main(int argc, char *argv[])
     {
         for (int y = 0; y < height; y++)
         {
-            image.SetPixel(x, y, Vec3<unsigned char>(255, 0, 255));
+            image.SetPixel(x, y, Vec3_8b(255, 0, 255));
         }
     }
 
