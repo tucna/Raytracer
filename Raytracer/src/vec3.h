@@ -15,15 +15,6 @@ struct Vec3
 
     Vec3() { e[0] = 0; e[1] = 0; e[2] = 0; }
     Vec3( T e0, T e1, T e2 ) { e[0] = e0; e[1] = e1; e[2] = e2; }
-    
-    /*
-    Vec3(const Vec3<float>& v) 
-    {
-        e[0] = static_cast<T>(round(v.e[0] * 255.0)); 
-        e[1] = static_cast<T>(round(v.e[1] * 255.0)); 
-        e[2] = static_cast<T>(round(v.e[2] * 255.0));
-    }
-    */
 
     float length() const { return sqrt(e[0] * e[0] + e[1] * e[1] + e[2] * e[2]); }
     float dot(const Vec3& v) const { return e[0] * v.e[0] + e[1] * v.e[1] + e[2] * v.e[2]; }

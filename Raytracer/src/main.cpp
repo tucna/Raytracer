@@ -7,24 +7,37 @@
 using namespace std;
 
 template <typename T>
-bool hitSphere(const Vec3<T> center, float radius, const Ray<T> r)
+float hitSphere(const Vec3<T> center, float radius, const Ray<T> r)
 {
     Vec3<T> oc = r.A - center;
     float a = r.B.dot(r.B);
     float b = 2.0 * oc.dot(r.B);
     float c = oc.dot(oc) - radius * radius;
     float discriminant = b * b - 4 * a * c;
-    return (discriminant > 0);
+    if (discriminant < 0)
+    {
+        return -1.0;
+    }
+    else
+    {
+        return (-b - sqrt(discriminant)) / (2.0 * a);
+    }
 }
 
 template <typename T>
-Vec3<T> color(const Ray<T>& r)
+Vec3<T> color(Ray<T> r)
 {
-    if (hitSphere(Vec3<T>(0, 0, -1), 0.5, r))
-        return Vec3<T>(1, 0, 0);
+    float t = hitSphere(Vec3<T>(0, 0, -1), 0.5, r);
+
+    if (t > 0.0)
+    {
+        Vec3<T> temp = r.pointAtT(t);// -Vec3<T>(0, 0, -1);
+        Vec3<T> N = temp.normalized();
+        return 0.5f * Vec3<T>(N.x + 1, N.y + 1, N.z + 1);
+    }
 
     Vec3<T> unit_direction = r.B.normalized();
-    float t = 0.5f * (unit_direction.y + 1.0f);
+    t = 0.5f * (unit_direction.y + 1.0f);
     return (1.0f - t) * Vec3<T>(1.0, 1.0, 1.0) + t * Vec3<T>(0.5f, 0.7f, 1.0f);
 }
 
