@@ -18,7 +18,7 @@ Image::~Image()
     _pixels.clear();
 }
 
-void Image::SetPixel(int x, int y, const Vec3_8b& color)
+void Image::setPixel(int x, int y, const Vec3_8b& color)
 {
     unsigned int index = (y * _w + x) * _ch;
 
@@ -27,7 +27,7 @@ void Image::SetPixel(int x, int y, const Vec3_8b& color)
     _pixels[index + 2] = color.b;
 }
 
-void Image::SaveToBMP(const char* file)
+void Image::saveToBMP(const char* file)
 {
     stbi_write_bmp(file, _w, _h, _ch, _pixels.data());
 }
