@@ -31,7 +31,7 @@ Vec3<T> color(Ray<T> r)
 
     if (t > 0.0)
     {
-        Vec3<T> temp = r.pointAtT(t);// -Vec3<T>(0, 0, -1);
+        Vec3<T> temp = r.pointAtT(t) - Vec3<T>(0, 0, -1);
         Vec3<T> N = temp.normalized();
         return 0.5f * Vec3<T>(N.x + 1, N.y + 1, N.z + 1);
     }
@@ -66,7 +66,8 @@ int main(int argc, char *argv[])
             Vec3_32b col = color(r);
 
             //image.setPixel(x, y, Vec3_8b(col));
-            image.setPixel(x, y, Vec3_8b(255.99 * col.r, 255.99 * col.g, 255.99 * col.b));
+            //image.setPixel(x, y, Vec3_8b(255.99 * col.r, 255.99 * col.g, 255.99 * col.b));
+            image.setPixel(x, height - 1 - y, Vec3_8b(255.99 * col.r, 255.99 * col.g, 255.99 * col.b));
         }
     }
 
