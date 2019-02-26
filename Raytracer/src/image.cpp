@@ -6,12 +6,12 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 
-Image::Image(unsigned int width, unsigned int height)
+Image::Image(unsigned int width, unsigned int height, unsigned int channels) :
+    _w(width),
+    _h(height),
+    _ch(channels)
 {
-    _pixels.resize(width * height * 3);
-
-    _w = width;
-    _h = height;
+    _pixels.resize(width * height * channels);
 }
 
 Image::~Image()
@@ -19,16 +19,16 @@ Image::~Image()
     _pixels.clear();
 }
 
-void Image::SetPixel(int x, int y, const Vec3& color)
+void Image::SetPixel(int x, int y, const Vec3<unsigned char>& color)
 {
-    unsigned int index = (y * _w + x) * 3; // 3 channels RGB
+    unsigned int index = (y * _w + x) * _ch;
 
-    _pixels[index + 0] = color.r();
-    _pixels[index + 1] = color.g();
-    _pixels[index + 2] = color.b();
+    _pixels[index + 0] = color.r;
+    _pixels[index + 1] = color.g;
+    _pixels[index + 2] = color.b;
 }
 
 void Image::SaveToBMP(const char* file)
 {
-    stbi_write_bmp(file, _w, _h, 3, _pixels.data());
+    stbi_write_bmp(file, _w, _h, _ch, _pixels.data());
 }

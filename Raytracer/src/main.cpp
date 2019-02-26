@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     {
         for (int y = 0; y < height; y++)
         {
-            image.SetPixel(x, y, Vec3(255, 0, 255));
+            image.SetPixel(x, y, Vec3<unsigned char>(255, 0, 255));
         }
     }
 
