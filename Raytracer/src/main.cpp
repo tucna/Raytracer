@@ -1,5 +1,7 @@
 #include <iostream>
+#include <random>
 
+#include "camera.h"
 #include "image.h"
 #include "ray.h"
 #include "vec3.h"
@@ -32,11 +34,7 @@ int main(int argc, char *argv[])
 
     int width = 400;
     int height = 200;
-
-    Vec3_32b lower_left_corner(-2.0, -1.0, -1.0);
-    Vec3_32b horizontal(4.0, 0.0, 0.0);
-    Vec3_32b vertical(0.0, 2.0, 0.0);
-    Vec3_32b origin(0.0, 0.0, 0.0);
+    int ns = 100;
 
     Hitable<float> *list[2];
 
@@ -44,20 +42,31 @@ int main(int argc, char *argv[])
     list[1] = new Sphere<float>(Vec3_32b(0, -100.5, -1), 100);
 
     Hitable<float> *world = new HitableList<float>(list, 2);
+    Camera cam;
 
     Image image(width, height);
+
+    std::mt19937 rng;
+    rng.seed(std::random_device()());
+    std::uniform_int_distribution<std::mt19937::result_type> dist(0, 1);
 
     for (int y = height - 1; y >= 0; y--)
     {
         for (int x = 0; x < width; x++)
         {
-            float u = (float)x / width;
-            float v = (float)y / height;
+            Vec3_32b col(0, 0, 0);
 
-            Ray_32b r(origin, lower_left_corner + u * horizontal + v * vertical);
-            Vec3_32b p = r.pointAtT(2.0);
-            Vec3_32b col = color(r, world);
+            for (int s = 0; s < ns; s++)
+            {
+                float u = (x + dist(rng)) / (float)width;
+                float v = (y + dist(rng)) / (float)height;
 
+                Ray_32b r = cam.getRay(u, v);
+                Vec3_32b p = r.pointAtT(2.0);
+                col = col + color(r, world);
+            }
+
+            col = col / (float)ns;
             image.setPixel(x, height - 1 - y, Vec3_8b(255.99 * col.r, 255.99 * col.g, 255.99 * col.b));
         }
     }
