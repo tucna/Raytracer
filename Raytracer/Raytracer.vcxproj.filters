@@ -35,5 +35,14 @@
     <ClInclude Include="src\ray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\hitable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hitablelist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
