@@ -2,23 +2,22 @@
 
 #include "hitable.h"
 
-template <typename T>
-class Sphere : public Hitable<T>
+class Sphere : public Hitable
 {
 public:
     Sphere() {}
-    Sphere(Vec3<T> cen, float r) : center(cen), radius(r) {}
+    Sphere(Vec3_32b cen, float r, Material* mat) : center(cen), radius(r), material(mat) {}
 
-    virtual bool hit(const Ray<T>& r, float t_min, float t_max, HitRecord<T>& rec) const;
+    virtual bool hit(const Ray& r, float t_min, float t_max, HitRecord& rec) const;
 
-    Vec3<T> center;
+    Vec3_32b center;
     float radius;
+    Material* material;
 };
 
-template<typename T>
-inline bool Sphere<T>::hit(const Ray<T>& r, float t_min, float t_max, HitRecord<T>& rec) const
+inline bool Sphere::hit(const Ray& r, float t_min, float t_max, HitRecord& rec) const
 {
-    Vec3<T> oc = r.A - center;
+    Vec3_32b oc = r.A - center;
     float a = r.B.dot(r.B);
     float b = oc.dot(r.B);
     float c = oc.dot(oc) - radius * radius;

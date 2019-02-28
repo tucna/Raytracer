@@ -14,8 +14,9 @@ public:
         origin = Vec3_32b(0.0, 0.0, 0.0);
     }
 
-    Ray_32b getRay(float u, float v) { return Ray_32b(origin, lower_left_corner + u * horizontal + v * vertical - origin); }
+    Ray getRay(float u, float v) { return Ray(origin, lower_left_corner + u * horizontal + v * vertical - origin); }
 
+private:
     Vec3_32b lower_left_corner;
     Vec3_32b horizontal;
     Vec3_32b vertical;
