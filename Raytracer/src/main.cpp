@@ -11,6 +11,23 @@
 
 using namespace std;
 
+std::mt19937 rng;
+std::uniform_real_distribution<> dist(0, 1);
+
+template <typename T>
+Vec3<T> randomInUnitSphere()
+{
+    Vec3<T> p;
+
+    do
+    {
+        p = 2.0f * Vec3<T>(dist(rng), dist(rng), dist(rng)) - Vec3<T>(1, 1, 1);
+    } while (p.squaredLength() >= 1.0);
+
+    return p;
+}
+
+
 template <typename T>
 Vec3<T> color(Ray<T> r, Hitable<T> *world)
 {
@@ -18,7 +35,10 @@ Vec3<T> color(Ray<T> r, Hitable<T> *world)
 
     if (world->hit(r, 0.0, FLT_MAX, rec))
     {
-        return 0.5f * Vec3<T>(rec.normal.x + 1, rec.normal.y + 1, rec.normal.z + 1);
+        Vec3<T> target = rec.p + rec.normal + randomInUnitSphere<T>();
+
+        return 0.5f * color(Ray<T>(rec.p, target - rec.p), world);
+        //return 0.5f * Vec3<T>(rec.normal.x + 1, rec.normal.y + 1, rec.normal.z + 1);
     }
     else
     {
@@ -31,6 +51,8 @@ Vec3<T> color(Ray<T> r, Hitable<T> *world)
 int main(int argc, char *argv[])
 {
     cout << "In progress..." << endl;
+
+    rng.seed(std::random_device()());
 
     int width = 400;
     int height = 200;
@@ -45,10 +67,6 @@ int main(int argc, char *argv[])
     Camera cam;
 
     Image image(width, height);
-
-    std::mt19937 rng;
-    rng.seed(std::random_device()());
-    std::uniform_int_distribution<std::mt19937::result_type> dist(0, 1);
 
     for (int y = height - 1; y >= 0; y--)
     {
@@ -67,6 +85,9 @@ int main(int argc, char *argv[])
             }
 
             col = col / (float)ns;
+
+            col = Vec3_32b(sqrt(col.r), sqrt(col.g), sqrt(col.b));
+
             image.setPixel(x, height - 1 - y, Vec3_8b(255.99 * col.r, 255.99 * col.g, 255.99 * col.b));
         }
     }
