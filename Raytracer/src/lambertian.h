@@ -29,7 +29,6 @@ int main()
 
 #pragma once
 
-#include "randomNumber.h"
 
 #include "material.h"
 #include "ray.h"
@@ -41,21 +40,7 @@ public:
 
     virtual bool scatter(const Ray& r_in, const HitRecord& rec, Vec3_32b& attentuation, Ray& scattered) const;
 
-    Vec3_32b randomInUnitSphere() const
-    {
-        Vec3_32b p;
-
-        do
-        {
-            p = 2.0f * Vec3_32b(dice.roll(), dice.roll(), dice.roll()) - Vec3_32b(1, 1, 1);
-            //p = 2.0f * Vec3_32b(0.1f, 0.1f, 0.1f) - Vec3_32b(1, 1, 1);
-        } while (p.squaredLength() >= 1.0);
-
-        return p;
-    }
-
     Vec3_32b albedo;
-    RandomNumber dice;
 };
 
 inline bool Lambertian::scatter(const Ray& r_in, const HitRecord& rec, Vec3_32b& attentuation, Ray& scattered) const
