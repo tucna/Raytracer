@@ -31,6 +31,7 @@ inline bool Sphere::hit(const Ray& r, float t_min, float t_max, HitRecord& rec) 
             rec.t = temp;
             rec.p = r.pointAtT(rec.t);
             rec.normal = (rec.p - center) / radius;
+            rec.mat_ptr = material;
 
             return true;
         }
@@ -42,6 +43,7 @@ inline bool Sphere::hit(const Ray& r, float t_min, float t_max, HitRecord& rec) 
             rec.t = temp;
             rec.p = r.pointAtT(rec.t);
             rec.normal = (rec.p - center) / radius;
+            rec.mat_ptr = material;
 
             return true;
         }

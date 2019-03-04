@@ -1,5 +1,4 @@
 #include <iostream>
-#include <random>
 
 #include "camera.h"
 #include "image.h"
@@ -12,10 +11,11 @@
 #include "lambertian.h"
 #include "metal.h"
 
+#include "randomNumber.h"
+
 using namespace std;
 
-std::mt19937 rng;
-std::uniform_real_distribution<> dist(0, 1);
+RandomNumber mainDice;
 
 Vec3_32b color(Ray r, Hitable *world, int depth)
 {
@@ -52,13 +52,11 @@ int main(int argc, char *argv[])
 {
     cout << "In progress..." << endl;
 
-    rng.seed(std::random_device()());
-
     int width = 400;
     int height = 200;
     int ns = 100;
 
-    Hitable *list[2];
+    Hitable *list[4];
 
     list[0] = new Sphere(Vec3_32b(0, 0, -1), 0.5, new Lambertian(Vec3_32b(0.8f, 0.3f, 0.3f)));
     list[1] = new Sphere(Vec3_32b(0, -100.5, -1), 100, new Lambertian(Vec3_32b(0.8f, 0.8f, 0.0f)));
@@ -78,8 +76,8 @@ int main(int argc, char *argv[])
 
             for (int s = 0; s < ns; s++)
             {
-                float u = (x + (float)dist(rng)) / (float)width;
-                float v = (y + (float)dist(rng)) / (float)height;
+                float u = (x + (float)mainDice.roll()) / (float)width;
+                float v = (y + (float)mainDice.roll()) / (float)height;
 
                 Ray r = cam.getRay(u, v);
                 Vec3_32b p = r.pointAtT(2.0);

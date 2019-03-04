@@ -56,5 +56,8 @@
     <ClInclude Include="src\metal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\randomNumber.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -29,7 +29,7 @@ int main()
 
 #pragma once
 
-#include <random>
+#include "randomNumber.h"
 
 #include "material.h"
 #include "ray.h"
@@ -37,9 +37,7 @@ int main()
 class Lambertian : public Material
 {
 public:
-    Lambertian(const Vec3_32b& a) : albedo(a), rng(rd()), dist(std::uniform_real_distribution<float>(0, 1)) 
-    {
-    }
+    Lambertian(const Vec3_32b& a) : albedo(a) {}
 
     virtual bool scatter(const Ray& r_in, const HitRecord& rec, Vec3_32b& attentuation, Ray& scattered) const;
 
@@ -49,7 +47,7 @@ public:
 
         do
         {
-            p = 2.0f * Vec3_32b(dist(rng), dist(rng), dist(rng)) - Vec3_32b(1, 1, 1);
+            p = 2.0f * Vec3_32b(dice.roll(), dice.roll(), dice.roll()) - Vec3_32b(1, 1, 1);
             //p = 2.0f * Vec3_32b(0.1f, 0.1f, 0.1f) - Vec3_32b(1, 1, 1);
         } while (p.squaredLength() >= 1.0);
 
@@ -57,10 +55,7 @@ public:
     }
 
     Vec3_32b albedo;
-
-    std::mt19937 rng;
-    std::random_device rd;
-    std::uniform_real_distribution<float> dist;
+    RandomNumber dice;
 };
 
 inline bool Lambertian::scatter(const Ray& r_in, const HitRecord& rec, Vec3_32b& attentuation, Ray& scattered) const
