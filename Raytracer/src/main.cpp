@@ -56,7 +56,15 @@ int main(int argc, char *argv[])
     int height = 200;
     int ns = 100;
 
+    //Camera cam(Vec3_32b(-2,2,1), Vec3_32b(0,0,-1), Vec3_32b(0,1,0), 50, (float)width / (float)height);
+    Camera cam(Vec3_32b(0, 0, 1), Vec3_32b(0, 0, -1), Vec3_32b(0, 1, 0), 50, (float)width / (float)height);
+
+    float R = cos(M_PI / 4);
+
     Hitable *list[4];
+
+    //list[0] = new Sphere(Vec3_32b(-R, 0, -1), R, new Lambertian(Vec3_32b(0.8f, 0.3f, 0.3f)));
+    //list[1] = new Sphere(Vec3_32b(R,  0, -1), R, new Lambertian(Vec3_32b(0.8f, 0.8f, 0.0f)));
 
     list[0] = new Sphere(Vec3_32b(0, 0, -1), 0.5, new Lambertian(Vec3_32b(0.8f, 0.3f, 0.3f)));
     list[1] = new Sphere(Vec3_32b(0, -100.5, -1), 100, new Lambertian(Vec3_32b(0.8f, 0.8f, 0.0f)));
@@ -64,7 +72,6 @@ int main(int argc, char *argv[])
     list[3] = new Sphere(Vec3_32b(-1, 0, -1), 0.5, new Metal(Vec3_32b(0.8f, 0.8f, 0.8f), 1.0f));
 
     Hitable *world = new HitableList(list, 4);
-    Camera cam;
 
     Image image(width, height);
 
