@@ -2,17 +2,18 @@
 
 #include "ray.h"
 
-template <typename T>
+class Material;
+
 struct HitRecord
 {
     float t;
-    Vec3<T> p;
-    Vec3<T> normal;
+    Vec3_32b p;
+    Vec3_32b normal;
+    Material* mat_ptr;
 };
 
-template <typename T>
 class Hitable
 {
 public:
-    virtual bool hit(const Ray<T>& r, float t_min, float t_max, HitRecord<T>& rec) const = 0;
+    virtual bool hit(const Ray& r, float t_min, float t_max, HitRecord& rec) const = 0;
 };
