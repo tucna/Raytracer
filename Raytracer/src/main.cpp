@@ -16,8 +16,6 @@
 
 using namespace std;
 
-RandomNumber mainDice;
-
 Vec3_32b color(Ray r, Hitable *world, int depth)
 {
     HitRecord rec;
@@ -35,11 +33,6 @@ Vec3_32b color(Ray r, Hitable *world, int depth)
         {
             return Vec3_32b(0, 0, 0);
         }
-
-        //Vec3<T> target = rec.p + rec.normal + randomInUnitSphere<T>();
-
-        //return 0.5f * color(Ray<T>(rec.p, target - rec.p), world);
-        //return 0.5f * Vec3<T>(rec.normal.x + 1, rec.normal.y + 1, rec.normal.z + 1);
     }
     else
     {
@@ -53,6 +46,8 @@ int main(int argc, char *argv[])
 {
     cout << "In progress..." << endl;
 
+    RandomNumber mainDice;
+
     int width = 400;
     int height = 200;
     int ns = 100;
@@ -60,23 +55,19 @@ int main(int argc, char *argv[])
     Vec3_32b lookFrom(0,0,1);
     Vec3_32b lookAt(0, 0, -1);
     float dist_to_focus = (lookFrom - lookAt).length();
-    float aperture = 0.05; // 2.0
+    float aperture = 0.05f;
 
     Camera cam(lookFrom, lookAt, Vec3_32b(0,1,0), 50, (float)width / (float)height, aperture, dist_to_focus);
-    //Camera cam(Vec3_32b(0, 0, 1), Vec3_32b(0, 0, -1), Vec3_32b(0, 1, 0), 50, (float)width / (float)height);
 
-    float R = cos(M_PI / 4);
+    float R = cos(M_PI / 4.0f);
 
     Hitable *list[5];
 
-    //list[0] = new Sphere(Vec3_32b(-R, 0, -1), R, new Lambertian(Vec3_32b(0.8f, 0.3f, 0.3f)));
-    //list[1] = new Sphere(Vec3_32b(R,  0, -1), R, new Lambertian(Vec3_32b(0.8f, 0.8f, 0.0f)));
-
-    list[0] = new Sphere(Vec3_32b(0, 0, -1), 0.5, new Lambertian(Vec3_32b(0.1f, 0.2f, 0.5f)));
-    list[1] = new Sphere(Vec3_32b(0, -100.5, -1), 100, new Lambertian(Vec3_32b(0.4f, 0.4f, 0.4f)));
-    list[2] = new Sphere(Vec3_32b(1, 0, -1), 0.5, new Metal(Vec3_32b(0.8f, 0.6f, 0.2f), 0.3f));
-    list[3] = new Sphere(Vec3_32b(-1, 0, -1), 0.5, new Dielectrict(1.5f));
-    list[4] = new Sphere(Vec3_32b(-1, 0, -1), -0.45, new Dielectrict(1.5f));
+    list[0] = new Sphere(Vec3_32b(0, 0, -1), 0.5f, new Lambertian(Vec3_32b(0.1f, 0.2f, 0.5f)));
+    list[1] = new Sphere(Vec3_32b(0, -100.5, -1), 100.0f, new Lambertian(Vec3_32b(0.4f, 0.4f, 0.4f)));
+    list[2] = new Sphere(Vec3_32b(1, 0, -1), 0.5f, new Metal(Vec3_32b(0.8f, 0.6f, 0.2f), 0.3f));
+    list[3] = new Sphere(Vec3_32b(-1, 0, -1), 0.5f, new Dielectrict(1.5f));
+    list[4] = new Sphere(Vec3_32b(-1, 0, -1), -0.45f, new Dielectrict(1.5f));
 
     Hitable *world = new HitableList(list, 5);
 

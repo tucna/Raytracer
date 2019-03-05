@@ -10,6 +10,7 @@ public:
 
     virtual bool hit(const Ray& r, float t_min, float t_max, HitRecord& rec) const;
 
+private:
     Vec3_32b center;
     float radius;
     Material* material;
@@ -18,10 +19,12 @@ public:
 inline bool Sphere::hit(const Ray& r, float t_min, float t_max, HitRecord& rec) const
 {
     Vec3_32b oc = r.A - center;
+
     float a = r.B.dot(r.B);
     float b = oc.dot(r.B);
     float c = oc.dot(oc) - radius * radius;
     float discriminant = b * b - a * c;
+
     if (discriminant > 0)
     {
         float temp = (-b -sqrt(b * b - a * c)) / a;

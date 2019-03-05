@@ -16,6 +16,7 @@ public:
 
     virtual bool scatter(const Ray& r_in, const HitRecord& rec, Vec3_32b& attentuation, Ray& scattered) const;
 
+private:
     Vec3_32b albedo;
     float fuzz;
 };

@@ -1,8 +1,8 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #define STBI_MSC_SECURE_CRT
-#include "stb_image_write.h"
 
 #include "image.h"
+#include "stb_image_write.h"
 #include "vec3.h"
 
 Image::Image(unsigned int width, unsigned int height, unsigned int channels) :

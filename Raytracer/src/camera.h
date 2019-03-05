@@ -1,11 +1,11 @@
 #pragma once
 
-#define _USE_MATH_DEFINES // for C++
+#define _USE_MATH_DEFINES
 #include <math.h>
 
+#include "randomNumber.h"
 #include "ray.h"
 #include "vec3.h"
-#include "randomNumber.h"
 
 class Camera
 {
@@ -13,8 +13,8 @@ public:
     Camera(Vec3_32b lookFrom, Vec3_32b lookAt, Vec3_32b up, float vfov, float aspect, float aperture, float focus_disc)
     {
         lens_radius = aperture / 2.0f;
-        float theta = vfov * M_PI / 180;
-        float half_height = tan(theta / 2);
+        float theta = vfov * M_PI / 180.0f;
+        float half_height = tan(theta / 2.0f);
         float half_width = aspect * half_height;
 
         origin = lookFrom;

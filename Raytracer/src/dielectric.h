@@ -64,7 +64,6 @@ inline bool Dielectrict::scatter(const Ray& r_in, const HitRecord& rec, Vec3_32b
     }
     if (refract(r_in.B, outward_normal, ni_over_nt, refracted))
     {
-        //scattered = Ray(rec.p, refracted);
         reflect_prob = schlick(cosine, ref_idx);
     }
     else
