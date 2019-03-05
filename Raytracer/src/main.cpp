@@ -10,6 +10,7 @@
 
 #include "lambertian.h"
 #include "metal.h"
+#include "dielectric.h"
 
 #include "randomNumber.h"
 
@@ -66,10 +67,10 @@ int main(int argc, char *argv[])
     //list[0] = new Sphere(Vec3_32b(-R, 0, -1), R, new Lambertian(Vec3_32b(0.8f, 0.3f, 0.3f)));
     //list[1] = new Sphere(Vec3_32b(R,  0, -1), R, new Lambertian(Vec3_32b(0.8f, 0.8f, 0.0f)));
 
-    list[0] = new Sphere(Vec3_32b(0, 0, -1), 0.5, new Lambertian(Vec3_32b(0.8f, 0.3f, 0.3f)));
+    list[0] = new Sphere(Vec3_32b(0, 0, -1), 0.5, new Lambertian(Vec3_32b(0.1f, 0.2f, 0.5f)));
     list[1] = new Sphere(Vec3_32b(0, -100.5, -1), 100, new Lambertian(Vec3_32b(0.8f, 0.8f, 0.0f)));
     list[2] = new Sphere(Vec3_32b(1, 0, -1), 0.5, new Metal(Vec3_32b(0.8f, 0.6f, 0.2f), 0.3f));
-    list[3] = new Sphere(Vec3_32b(-1, 0, -1), 0.5, new Metal(Vec3_32b(0.8f, 0.8f, 0.8f), 1.0f));
+    list[3] = new Sphere(Vec3_32b(-1, 0, -1), 0.5, new Dielectrict(1.5f));
 
     Hitable *world = new HitableList(list, 4);
 

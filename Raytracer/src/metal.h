@@ -6,14 +6,15 @@
 class Metal : public Material
 {
 public:
-    Metal(const Vec3_32b a, float f) : albedo(a) { if (f < 1) fuzz = 1; }
+    Metal(const Vec3_32b a, float f) : albedo(a)
+    {
+        if (f < 1)
+            fuzz = f;
+        else
+            fuzz = 1;
+    }
 
     virtual bool scatter(const Ray& r_in, const HitRecord& rec, Vec3_32b& attentuation, Ray& scattered) const;
-
-    Vec3_32b reflect(const Vec3_32b& v, const Vec3_32b& n) const
-    {
-        return v - 2 * v.dot(n) * n;
-    }
 
     Vec3_32b albedo;
     float fuzz;

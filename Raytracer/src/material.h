@@ -24,5 +24,10 @@ public:
         return p;
     }
 
+    Vec3_32b reflect(const Vec3_32b& v, const Vec3_32b& n) const
+    {
+        return v - 2 * v.dot(n) * n;
+    }
+
     RandomNumber dice;
 };

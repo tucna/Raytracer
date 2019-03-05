@@ -31,6 +31,7 @@ struct Vec3
 
     Vec3 operator+(Vec3 v) const { return Vec3(e[0] + v.e[0], e[1] + v.e[1], e[2] + v.e[2]); }
     Vec3 operator-(Vec3 v) const { return Vec3(e[0] - v.e[0], e[1] - v.e[1], e[2] - v.e[2]); }
+    Vec3 operator-() const { return Vec3(-e[0], -e[1], -e[2]); }
     Vec3 operator*(Vec3 v) const { return Vec3(e[0] * v.e[0], e[1] * v.e[1], e[2] * v.e[2]); }
     Vec3 operator*(T s) const { return Vec3(e[0] * s, e[1] * s, e[2] * s); }
     Vec3 operator/(T s) const { return Vec3(e[0] / s, e[1] / s, e[2] / s); }
