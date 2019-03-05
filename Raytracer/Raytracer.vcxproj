@@ -21,16 +21,14 @@
   <ItemGroup>
     <ClCompile Include="src\image.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\material.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\camera.h" />
-    <ClInclude Include="src\dielectric.h" />
     <ClInclude Include="src\hitable.h" />
     <ClInclude Include="src\hitablelist.h" />
     <ClInclude Include="src\image.h" />
-    <ClInclude Include="src\lambertian.h" />
     <ClInclude Include="src\material.h" />
-    <ClInclude Include="src\metal.h" />
     <ClInclude Include="src\randomNumber.h" />
     <ClInclude Include="src\ray.h" />
     <ClInclude Include="src\sphere.h" />

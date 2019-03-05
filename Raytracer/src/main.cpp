@@ -2,17 +2,12 @@
 
 #include "camera.h"
 #include "image.h"
+#include "hitablelist.h"
+#include "material.h"
+#include "sphere.h"
+#include "randomNumber.h"
 #include "ray.h"
 #include "vec3.h"
-
-#include "sphere.h"
-#include "hitablelist.h"
-
-#include "lambertian.h"
-#include "metal.h"
-#include "dielectric.h"
-
-#include "randomNumber.h"
 
 using namespace std;
 

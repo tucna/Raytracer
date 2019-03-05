@@ -11,23 +11,47 @@ class Material
 public:
     virtual bool scatter(const Ray& r_in, const HitRecord& rec, Vec3_32b& attentuation, Ray& scattered) const = 0;
 
-    Vec3_32b randomInUnitSphere() const
-    {
-        Vec3_32b p;
+    Vec3_32b randomInUnitSphere() const;
+    Vec3_32b reflect(const Vec3_32b& v, const Vec3_32b& n) const;
 
-        do
-        {
-            p = 2.0f * Vec3_32b(dice.roll(), dice.roll(), dice.roll()) - Vec3_32b(1, 1, 1);
-            //p = 2.0f * Vec3_32b(0.1f, 0.1f, 0.1f) - Vec3_32b(1, 1, 1);
-        } while (p.squaredLength() >= 1.0);
-
-        return p;
-    }
-
-    Vec3_32b reflect(const Vec3_32b& v, const Vec3_32b& n) const
-    {
-        return v - 2 * v.dot(n) * n;
-    }
-
+protected:
     RandomNumber dice;
+};
+
+class Dielectrict : public Material
+{
+public:
+    Dielectrict(float ri) : ref_idx(ri) {}
+
+    virtual bool scatter(const Ray& r_in, const HitRecord& rec, Vec3_32b& attentuation, Ray& scattered) const;
+
+    float schlick(float cosine, float ref_idx) const;
+
+    bool refract(const Vec3_32b& v, const Vec3_32b& n, float ni_over_nt, Vec3_32b& refracted) const;
+
+private:
+    float ref_idx;
+};
+
+class Lambertian : public Material
+{
+public:
+    Lambertian(const Vec3_32b& a) : albedo(a) {}
+
+    virtual bool scatter(const Ray& r_in, const HitRecord& rec, Vec3_32b& attentuation, Ray& scattered) const;
+
+private:
+    Vec3_32b albedo;
+};
+
+class Metal : public Material
+{
+public:
+    Metal(const Vec3_32b a, float f) : albedo(a) { fuzz = f < 1 ? f : 1; }
+
+    virtual bool scatter(const Ray& r_in, const HitRecord& rec, Vec3_32b& attentuation, Ray& scattered) const;
+
+private:
+    Vec3_32b albedo;
+    float fuzz;
 };
