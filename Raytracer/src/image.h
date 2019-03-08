@@ -11,6 +11,7 @@ public:
     ~Image();
 
     void setPixel(int x, int y, const Vec3_8b& color);
+    void setPixel(int x, int y, const Vec3_32b& color);
     void saveToBMP(const char* file);
 
     unsigned int getWidth() { return _w; };

@@ -27,6 +27,17 @@ void Image::setPixel(int x, int y, const Vec3_8b& color)
     _pixels[index + 2] = color.b;
 }
 
+void Image::setPixel(int x, int y, const Vec3_32b& color)
+{
+    Vec3_8b vec;
+
+    vec.r = static_cast<unsigned char>(round(255.0f * color.r));
+    vec.g = static_cast<unsigned char>(round(255.0f * color.g));
+    vec.b = static_cast<unsigned char>(round(255.0f * color.b));
+
+    setPixel(x, y, vec);
+}
+
 void Image::saveToBMP(const char* file)
 {
     stbi_write_bmp(file, _w, _h, _ch, _pixels.data());

@@ -81,7 +81,7 @@ void Scene::render()
 
             col = Vec3_32b(sqrt(col.r), sqrt(col.g), sqrt(col.b));
 
-            _image->setPixel(x, height - 1 - y, Vec3_8b(255.99f * col.r, 255.99f * col.g, 255.99f * col.b));
+            _image->setPixel(x, height - 1 - y, Vec3_32b(col.r, col.g, col.b));
         }
     }
 
