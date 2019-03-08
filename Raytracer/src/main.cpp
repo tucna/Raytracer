@@ -28,8 +28,11 @@ int main(int argc, char *argv[])
     Camera cam(lookFrom, lookAt, Vec3_32b(0,1,0), 50, (float)width / (float)height, aperture, dist_to_focus);
 
     Image image(width, height);
-    Scene scene(image);
+    Scene scene(&image);
+
     scene.init(&cam, ns);
+    scene.setupDemoScene(0);
+    scene.render();
 
     image.saveToBMP("res/output.bmp");
 

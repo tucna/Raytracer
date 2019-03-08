@@ -8,11 +8,6 @@
 
 #include "material.h"
 
-Scene::Scene(Image& image) :
-    _image(image)
-{
-}
-
 Vec3_32b Scene::color(Ray r, int depth)
 {
     HitRecord rec;
@@ -63,8 +58,8 @@ void Scene::setupDemoScene(int id)
 
 void Scene::render()
 {
-    unsigned int width = _image.getWidth();
-    unsigned int height = _image.getHeight();
+    unsigned int width = _image->getWidth();
+    unsigned int height = _image->getHeight();
 
     for (int y = height - 1; y >= 0; y--)
     {
@@ -86,7 +81,7 @@ void Scene::render()
 
             col = Vec3_32b(sqrt(col.r), sqrt(col.g), sqrt(col.b));
 
-            _image.setPixel(x, height - 1 - y, Vec3_8b(255.99f * col.r, 255.99f * col.g, 255.99f * col.b));
+            _image->setPixel(x, height - 1 - y, Vec3_8b(255.99f * col.r, 255.99f * col.g, 255.99f * col.b));
         }
     }
 

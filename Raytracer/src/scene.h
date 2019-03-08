@@ -12,7 +12,7 @@ class Hitablelist;
 class Scene
 {
 public:
-    Scene(Image& image);
+    Scene(Image* image) : _image(image) {}
 
     void init(Camera* camera, unsigned int raysPerPixel) { _cam = camera; _raysPerPixel = raysPerPixel; }
 
@@ -23,7 +23,7 @@ public:
 private:
     Vec3_32b color(Ray r, int depth);
 
-    Image _image;
+    Image* _image;
     unsigned int _raysPerPixel;
 
     HitableList* _world;
