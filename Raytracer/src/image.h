@@ -13,6 +13,9 @@ public:
     void setPixel(int x, int y, const Vec3_8b& color);
     void saveToBMP(const char* file);
 
+    unsigned int getWidth() { return _w; };
+    unsigned int getHeight() { return _h; };
+
 private:
     unsigned int _w;
     unsigned int _h;

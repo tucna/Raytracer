@@ -18,10 +18,10 @@ private:
 
 inline bool Sphere::hit(const Ray& r, float t_min, float t_max, HitRecord& rec) const
 {
-    Vec3_32b oc = r.A - center;
+    Vec3_32b oc = r.O - center;
 
-    float a = r.B.dot(r.B);
-    float b = oc.dot(r.B);
+    float a = r.D.dot(r.D);
+    float b = oc.dot(r.D);
     float c = oc.dot(oc) - radius * radius;
     float discriminant = b * b - a * c;
 
