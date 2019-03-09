@@ -61,16 +61,16 @@ void Scene::render()
     unsigned int width = _image->getWidth();
     unsigned int height = _image->getHeight();
 
-    for (int y = height - 1; y >= 0; y--)
+    for (unsigned int y = height - 1; y >= 0; y--)
     {
-        for (int x = 0; x < width; x++)
+        for (unsigned int x = 0; x < width; x++)
         {
             Vec3_32b col(0, 0, 0);
 
-            for (int s = 0; s < _raysPerPixel; s++)
+            for (unsigned int s = 0; s < _raysPerPixel; s++)
             {
-                float u = (x + (float)_dice.roll()) / (float)width;
-                float v = (y + (float)_dice.roll()) / (float)height;
+                float u = ((float)x + _dice.roll()) / (float)width;
+                float v = ((float)y + _dice.roll()) / (float)height;
 
                 Ray r = _cam->getRay(u, v);
                 Vec3_32b p = r.pointAtT(2.0);

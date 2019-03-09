@@ -7,7 +7,7 @@
 #include "vec3.h"
 
 class Camera;
-class Hitablelist;
+class HitableList;
 
 class Scene
 {
