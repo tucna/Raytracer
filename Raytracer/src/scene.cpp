@@ -30,7 +30,7 @@ Vec3_32b Scene::color(Ray r, int depth)
     {
         Vec3_32b unit_direction = r.D.normalized();
         float t = 0.5f * (unit_direction.y + 1.0f);
-        return (1.0f - t) * Vec3_32b(1.0, 1.0, 1.0) + t * Vec3_32b(0.5f, 0.7f, 1.0f);
+        return (1.0f - t) * Vec3_32b(0.5f, 0.7f, 1.0f) + t * Vec3_32b(1.0, 1.0, 1.0);
     }
 }
 
@@ -61,7 +61,7 @@ void Scene::render()
     unsigned int width = _image->getWidth();
     unsigned int height = _image->getHeight();
 
-    for (unsigned int y = height - 1; y >= 0; y--)
+    for (unsigned int y = 0; y < height; y++)
     {
         for (unsigned int x = 0; x < width; x++)
         {
