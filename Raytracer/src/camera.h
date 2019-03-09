@@ -16,13 +16,15 @@ public:
     Ray getRay(float s, float t);
 
 private:
-    Vec3_32b lower_left_corner;
-    Vec3_32b horizontal;
-    Vec3_32b vertical;
-    Vec3_32b origin;
+    Vec3_32b _lowerLeftCorner;
+    Vec3_32b _horizontal;
+    Vec3_32b _vertical;
+    Vec3_32b _origin;
+    Vec3_32b _u;
+	Vec3_32b _v;
+	Vec3_32b _w;
 
-    Vec3_32b u, v, w;
-    float lens_radius;
+    float _lensRadius;
 
-    RandomNumber dice;
+    RandomNumber _dice;
 };

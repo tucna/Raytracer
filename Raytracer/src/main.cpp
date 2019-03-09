@@ -2,7 +2,6 @@
 
 #include "camera.h"
 #include "image.h"
-#include "ray.h"
 #include "scene.h"
 #include "vec3.h"
 
@@ -20,8 +19,7 @@ int main(int argc, char *argv[])
 	float distToFocus = (lookFrom - lookAt).length();
     float aperture = 0.05f;
 
-    Camera cam(lookFrom, lookAt, Vec3_32b(0,1,0), 50, (float)width / (float)height, aperture, distToFocus);
-
+    Camera cam(lookFrom, lookAt, Vec3_32b(0, 1, 0), 50, (float)width / (float)height, aperture, distToFocus);
     Image image(width, height);
     Scene scene(&image);
 

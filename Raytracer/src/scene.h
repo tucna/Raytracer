@@ -15,9 +15,7 @@ public:
     Scene(Image* image) : _image(image) {}
 
     void init(Camera* camera, unsigned int raysPerPixel) { _cam = camera; _raysPerPixel = raysPerPixel; }
-
     void setupDemoScene(int id);
-
     void render();
 
 private:

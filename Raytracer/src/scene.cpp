@@ -73,7 +73,6 @@ void Scene::render()
                 float v = ((float)y + _dice.roll()) / (float)height;
 
                 Ray r = _cam->getRay(u, v);
-                Vec3_32b p = r.pointAtT(2.0);
                 col = col + color(r, 0);
             }
 
