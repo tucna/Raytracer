@@ -17,7 +17,7 @@ Vec3_32b Scene::color(Ray r, int depth)
         Ray scattered;
         Vec3_32b attenuation;
 
-        if (depth < 50 && rec.mat_ptr->scatter(r, rec, attenuation, scattered))
+        if (depth < 50 && rec.material->scatter(r, rec, attenuation, scattered))
         {
             return attenuation * color(scattered, depth + 1);
         }

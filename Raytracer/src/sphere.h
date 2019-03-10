@@ -33,9 +33,9 @@ inline bool Sphere::hit(const Ray& r, float tMin, float tMax, HitRecord& rec) co
         if (temp < tMax && temp > tMin)
         {
             rec.t = temp;
-            rec.p = r.pointAtT(rec.t);
-            rec.normal = (rec.p - _center) / _radius;
-            rec.mat_ptr = _material;
+            rec.point = r.pointAtT(rec.t);
+            rec.normal = (rec.point - _center) / _radius;
+            rec.material = _material;
 
             return true;
         }
@@ -45,9 +45,9 @@ inline bool Sphere::hit(const Ray& r, float tMin, float tMax, HitRecord& rec) co
         if (temp < tMax && temp > tMin)
         {
             rec.t = temp;
-            rec.p = r.pointAtT(rec.t);
-            rec.normal = (rec.p - _center) / _radius;
-            rec.mat_ptr = _material;
+            rec.point = r.pointAtT(rec.t);
+            rec.normal = (rec.point - _center) / _radius;
+            rec.material = _material;
 
             return true;
         }

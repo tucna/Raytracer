@@ -45,9 +45,9 @@ bool Material::refract(const Vec3_32b & v, const Vec3_32b & n, float ni_over_nt,
 
 bool Lambertian::scatter(const Ray& r, const HitRecord& rec, Vec3_32b& attentuation, Ray& scattered) const
 {
-    Vec3_32b target = rec.p + rec.normal + randomPointInUnitSphere();
+    Vec3_32b target = rec.point + rec.normal + randomPointInUnitSphere();
 
-    scattered = Ray(rec.p, target - rec.p);
+    scattered = Ray(rec.point, target - rec.point);
     attentuation = albedo;
 
     return true;
@@ -57,7 +57,7 @@ bool Metal::scatter(const Ray & r, const HitRecord & rec, Vec3_32b & attentuatio
 {
     Vec3_32b reflected = reflect(r.D.normalized(), rec.normal);
 
-    scattered = Ray(rec.p, reflected + fuzz * randomPointInUnitSphere());
+    scattered = Ray(rec.point, reflected + fuzz * randomPointInUnitSphere());
     attentuation = albedo;
 
     return (scattered.D.dot(rec.normal) > 0);
@@ -93,16 +93,16 @@ bool Dielectrict::scatter(const Ray & r, const HitRecord & rec, Vec3_32b & atten
     }
     else
     {
-        scattered = Ray(rec.p, reflected);
+        scattered = Ray(rec.point, reflected);
         reflect_prob = 1.0;
     }
     if (dice.roll() < reflect_prob)
     {
-        scattered = Ray(rec.p, reflected);
+        scattered = Ray(rec.point, reflected);
     }
     else
     {
-        scattered = Ray(rec.p, refracted);
+        scattered = Ray(rec.point, refracted);
     }
 
     return true;

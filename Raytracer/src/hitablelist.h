@@ -8,7 +8,7 @@ class HitableList : public Hitable
 {
 public:
     HitableList() {}
-    HitableList(std::vector<Hitable*> list) { _list = list; }
+    HitableList(std::vector<Hitable*>& list) { _list = list; }
 
     virtual bool hit(const Ray& r, float tMin, float tMax, HitRecord& rec) const;
 
@@ -18,17 +18,17 @@ private:
 
 inline bool HitableList::hit(const Ray& r, float tMin, float tMax, HitRecord& rec) const
 {
-    HitRecord temp_rec;
+    HitRecord tempRec;
     bool hitAnything = false;
-    float closest_so_far = tMax;
+    float closestSoFar = tMax;
 
     for (int i = 0; i < _list.size(); i++)
     {
-        if (_list[i]->hit(r, tMin, closest_so_far, temp_rec))
+        if (_list[i]->hit(r, tMin, closestSoFar, tempRec))
         {
             hitAnything = true;
-            closest_so_far = temp_rec.t;
-            rec = temp_rec;
+            closestSoFar = tempRec.t;
+            rec = tempRec;
         }
     }
 

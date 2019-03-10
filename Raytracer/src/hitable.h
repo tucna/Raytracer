@@ -7,9 +7,9 @@ class Material;
 struct HitRecord
 {
     float t;
-    Vec3_32b p;
+    Vec3_32b point;
     Vec3_32b normal;
-    Material* mat_ptr;
+    Material* material;
 };
 
 class Hitable

@@ -1,16 +1,15 @@
 #pragma once
 
-#define _USE_MATH_DEFINES
-#include <math.h>
-
 #include "randomNumber.h"
 #include "ray.h"
 #include "vec3.h"
 
+constexpr float PI = 3.14159265359f;
+
 class Camera
 {
 public:
-    Camera(Vec3_32b lookFrom, Vec3_32b lookAt, Vec3_32b up, float vfov, float aspect, float aperture, float focus_disc);
+    Camera(const Vec3_32b& lookFrom, const Vec3_32b& lookAt, const Vec3_32b& up, float vFov, float aspect, float aperture, float focus_disc);
 
     Vec3_32b randomInUnitDisk();
     Ray getRay(float s, float t);
