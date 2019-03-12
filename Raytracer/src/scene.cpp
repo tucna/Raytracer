@@ -51,6 +51,21 @@ void Scene::setupDemoScene(int id)
         _world = new HitableList(list);
     }
 
+    case 1:
+    {
+        std::vector<Hitable*> list;
+
+        list.push_back(new Sphere(Vec3_32b(0, 0, -1), 0.5f, new Lambertian(Vec3_32b(0.1f, 0.2f, 0.5f))));
+        list.push_back(new Sphere(Vec3_32b(0, -100.5, -1), 100.0f, new Lambertian(Vec3_32b(0.4f, 0.4f, 0.4f))));
+        list.push_back(new Sphere(Vec3_32b(0, 0, -105.5), 100.0f, new Metal(Vec3_32b(0.4f, 0.1f, 0.1f), 0.0f)));
+        list.push_back(new Sphere(Vec3_32b(105.5, 0, 0), 100.0f, new Lambertian(Vec3_32b(0.1f, 0.4f, 0.1f))));
+        list.push_back(new Sphere(Vec3_32b(1, 0, -1), 0.5f, new Metal(Vec3_32b(0.8f, 0.6f, 0.2f), 0.3f)));
+        list.push_back(new Sphere(Vec3_32b(-1, 0, -1), 0.5f, new Dielectrict(1.5f)));
+        list.push_back(new Sphere(Vec3_32b(-1, 0, -1), -0.45f, new Dielectrict(1.5f)));
+
+        _world = new HitableList(list);
+    }
+
     default:
     {}
     }

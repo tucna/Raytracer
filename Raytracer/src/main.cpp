@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 
     Vec3_32b lookFrom(0, 0, 1);
     Vec3_32b lookAt(0, 0, -1);
-    
+
 	float distToFocus = (lookFrom - lookAt).length();
     float aperture = 0.05f;
 
@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
     Scene scene(&image);
 
     scene.init(&cam, ns);
-    scene.setupDemoScene(0);
+    scene.setupDemoScene(1);
     scene.render();
 
     image.saveToBMP("res/output.bmp");
