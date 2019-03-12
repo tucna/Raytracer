@@ -6,10 +6,10 @@ class Material;
 
 struct HitRecord
 {
-    float t;
     Vec3_32b point;
     Vec3_32b normal;
     Material* material;
+    float t;
 };
 
 class Hitable

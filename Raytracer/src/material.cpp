@@ -26,16 +26,16 @@ float Material::schlick(float cosine, float ref_idx) const
     return r0 + (1 - r0) * pow((1 - cosine), 5);
 }
 
-bool Material::refract(const Vec3_32b & v, const Vec3_32b & n, float ni_over_nt, Vec3_32b & refracted) const
+bool Material::refract(const Vec3_32b& v, const Vec3_32b& n, float niOverNt, Vec3_32b& refracted) const
 {
     Vec3_32b uv = v.normalized();
 
     float dt = uv.dot(n);
-    float discriminant = 1.0f - ni_over_nt * ni_over_nt * (1 - dt * dt);
+    float discriminant = 1.0f - niOverNt * niOverNt * (1 - dt * dt);
 
     if (discriminant > 0)
     {
-        refracted = ni_over_nt * (uv - n * dt) - n * sqrt(discriminant);
+        refracted = niOverNt * (uv - n * dt) - n * sqrt(discriminant);
 
         return true;
     }

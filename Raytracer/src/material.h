@@ -8,13 +8,16 @@
 class Material
 {
 public:
+    Material() {}
+
     virtual bool scatter(const Ray& r, const HitRecord& rec, Vec3_32b& attentuation, Ray& scattered) const = 0;
 
     Vec3_32b randomPointInUnitSphere() const;
-
     Vec3_32b reflect(const Vec3_32b& v, const Vec3_32b& n) const;
+
+    bool refract(const Vec3_32b& v, const Vec3_32b& n, float niOverNt, Vec3_32b& refracted) const;
+
     float schlick(float cosine, float ref_idx) const;
-    bool refract(const Vec3_32b& v, const Vec3_32b& n, float ni_over_nt, Vec3_32b& refracted) const;
 
 protected:
     RandomNumber dice;

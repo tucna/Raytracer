@@ -13,8 +13,8 @@ public:
 
 private:
     Vec3_32b _center;
-    float _radius;
     Material* _material;
+    float _radius;
 };
 
 inline bool Sphere::hit(const Ray& r, float tMin, float tMax, HitRecord& rec) const

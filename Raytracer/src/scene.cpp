@@ -2,13 +2,13 @@
 
 #include "camera.h"
 #include "hitablelist.h"
+#include "image.h"
+#include "material.h"
 #include "scene.h"
 #include "sphere.h"
 #include "ray.h"
 
-#include "material.h"
-
-Vec3_32b Scene::color(Ray r, int depth)
+Vec3_32b Scene::color(const Ray& r, int depth)
 {
     HitRecord rec;
 
@@ -28,8 +28,8 @@ Vec3_32b Scene::color(Ray r, int depth)
     }
     else
     {
-        Vec3_32b unit_direction = r.D.normalized();
-        float t = 0.5f * (unit_direction.y + 1.0f);
+        // Background
+        float t = 0.5f * (r.D.normalized().y + 1.0f);
         return (1.0f - t) * Vec3_32b(0.5f, 0.7f, 1.0f) + t * Vec3_32b(1.0, 1.0, 1.0);
     }
 }

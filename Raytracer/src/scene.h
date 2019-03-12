@@ -1,12 +1,10 @@
 #pragma once
 
-#include <vector>
-
-#include "image.h"
 #include "randomNumber.h"
 #include "vec3.h"
 
 class Camera;
+class Image;
 class HitableList;
 
 class Scene
@@ -19,13 +17,12 @@ public:
     void render();
 
 private:
-    Vec3_32b color(Ray r, int depth);
+    Vec3_32b color(const Ray& r, int depth);
 
-    Image* _image;
-    unsigned int _raysPerPixel;
-
-    HitableList* _world;
     Camera* _cam;
-
+    HitableList* _world;
+    Image* _image;
     RandomNumber _dice;
+
+    unsigned int _raysPerPixel;
 };

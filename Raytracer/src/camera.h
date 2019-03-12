@@ -23,7 +23,7 @@ private:
 	Vec3_32b _v;
 	Vec3_32b _w;
 
-    float _lensRadius;
-
     RandomNumber _dice;
+
+    float _lensRadius;
 };
