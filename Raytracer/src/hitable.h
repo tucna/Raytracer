@@ -6,14 +6,14 @@ class Material;
 
 struct HitRecord
 {
-    float t;
-    Vec3_32b p;
+    Vec3_32b point;
     Vec3_32b normal;
-    Material* mat_ptr;
+    Material* material;
+    float t;
 };
 
 class Hitable
 {
 public:
-    virtual bool hit(const Ray& r, float t_min, float t_max, HitRecord& rec) const = 0;
+    virtual bool hit(const Ray& r, float tMin, float tMax, HitRecord& rec) const = 0;
 };

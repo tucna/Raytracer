@@ -5,10 +5,12 @@
 struct Ray
 {
     Ray() {}
-    Ray(const Vec3_32b& origin, const Vec3_32b& direction) : A(origin), B(direction) {}
+    Ray(const Vec3_32b& origin, const Vec3_32b& direction) : O(origin), D(direction) {}
 
-    Vec3_32b pointAtT(float t) const { return A + t * B; }
+    Vec3_32b pointAtT(float t) const { return O + t * D; }
 
-    Vec3_32b A;
-    Vec3_32b B;
+    // Ray origin
+    Vec3_32b O;
+    // Ray direction
+    Vec3_32b D;
 };

@@ -6,48 +6,51 @@ class Sphere : public Hitable
 {
 public:
     Sphere() {}
-    Sphere(Vec3_32b cen, float r, Material* mat) : center(cen), radius(r), material(mat) {}
+    Sphere(Vec3_32b center, float radius, Material* material) :
+		_center(center), _radius(radius), _material(material) {}
 
-    virtual bool hit(const Ray& r, float t_min, float t_max, HitRecord& rec) const;
+    virtual bool hit(const Ray& r, float tMin, float tMax, HitRecord& rec) const;
 
-    Vec3_32b center;
-    float radius;
-    Material* material;
+private:
+    Vec3_32b _center;
+    Material* _material;
+    float _radius;
 };
 
-inline bool Sphere::hit(const Ray& r, float t_min, float t_max, HitRecord& rec) const
+inline bool Sphere::hit(const Ray& r, float tMin, float tMax, HitRecord& rec) const
 {
-    Vec3_32b oc = r.A - center;
-    float a = r.B.dot(r.B);
-    float b = oc.dot(r.B);
-    float c = oc.dot(oc) - radius * radius;
+    Vec3_32b oc = r.O - _center;
+
+    float a = r.D.dot(r.D);
+    float b = oc.dot(r.D);
+    float c = oc.dot(oc) - _radius * _radius;
     float discriminant = b * b - a * c;
+
     if (discriminant > 0)
     {
         float temp = (-b -sqrt(b * b - a * c)) / a;
 
-        if (temp < t_max && temp > t_min)
+        if (temp < tMax && temp > tMin)
         {
             rec.t = temp;
-            rec.p = r.pointAtT(rec.t);
-            rec.normal = (rec.p - center) / radius;
-            rec.mat_ptr = material;
+            rec.point = r.pointAtT(rec.t);
+            rec.normal = (rec.point - _center) / _radius;
+            rec.material = _material;
 
             return true;
         }
 
         temp = (-b + sqrt(b * b - a * c)) / a;
 
-        if (temp < t_max && temp > t_min)
+        if (temp < tMax && temp > tMin)
         {
             rec.t = temp;
-            rec.p = r.pointAtT(rec.t);
-            rec.normal = (rec.p - center) / radius;
-            rec.mat_ptr = material;
+            rec.point = r.pointAtT(rec.t);
+            rec.normal = (rec.point - _center) / _radius;
+            rec.material = _material;
 
             return true;
         }
-
     }
 
     return false;
