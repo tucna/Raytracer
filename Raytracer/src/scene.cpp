@@ -49,6 +49,8 @@ void Scene::setupDemoScene(int id)
         list.push_back(new Sphere(Vec3_32b(-1, 0, -1), -0.45f, new Dielectrict(1.5f)));
 
         _world = new HitableList(list);
+
+        break;
     }
 
     case 1:
@@ -64,6 +66,8 @@ void Scene::setupDemoScene(int id)
         list.push_back(new Sphere(Vec3_32b(-1, 0, -1), -0.45f, new Dielectrict(1.5f)));
 
         _world = new HitableList(list);
+
+        break;
     }
 
     default:
