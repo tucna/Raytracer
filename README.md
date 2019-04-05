@@ -1,6 +1,10 @@
 # Raytracer
 Simple C++ raytracer inspired by [Peter Shirley](https://github.com/petershirley/raytracinginoneweekend).
 
+<p align="center">  
+  <img src="doc/intro.png">
+</p>
+
 # 3rd party libraries
 For a `BMP` handling, [stb_image_write.h](https://github.com/nothings/stb) is used.
 
@@ -23,13 +27,13 @@ Scene
 Scene 0, 800 x 400, 1000 rays per pixel:
 
 <p align="center">  
-  <img src="doc/output_0.bmp">
+  <img src="doc/output_0.png">
 </p>
 
 Scene 1, 800 x 400, 1000 rays per pixel:
 
 <p align="center">
-  <img src="doc/output_1.bmp">
+  <img src="doc/output_1.png">
 </p>
 
 `Scene` number is predefined and it can be setup via `Scene scene` object as follows:
