@@ -36,7 +36,7 @@ Scene 1, 800 x 400, 1000 rays per pixel:
   <img src="doc/output_1.png">
 </p>
 
-`Scene` number is predefined and it can be setup via `Scene scene` object as follows:
+`Scene` can be selected via its assigned number as follows:
 
 ```cpp
 Scene scene(&image); // image to be rendered to
