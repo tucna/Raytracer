@@ -7,27 +7,27 @@
 
 int main(int argc, char *argv[])
 {
-    std::cout << "In progress..." << std::endl;
+  std::cout << "In progress..." << std::endl;
 
-    unsigned int width = 400;
-    unsigned int height = 200;
-    unsigned int ns = 100;
+  unsigned int width = 400;
+  unsigned int height = 200;
+  unsigned int ns = 100;
 
-    Vec3_32b lookFrom(0, 0, 1);
-    Vec3_32b lookAt(0, 0, -1);
+  Vec3_32b lookFrom(0, 0, 1);
+  Vec3_32b lookAt(0, 0, -1);
 
-	float distToFocus = (lookFrom - lookAt).length();
-    float aperture = 0.05f;
+  float distToFocus = (lookFrom - lookAt).length();
+  float aperture = 0.05f;
 
-    Camera cam(lookFrom, lookAt, Vec3_32b(0, 1, 0), 50, (float)width / (float)height, aperture, distToFocus);
-    Image image(width, height);
-    Scene scene(&image);
+  Camera cam(lookFrom, lookAt, Vec3_32b(0, 1, 0), 50, (float)width / (float)height, aperture, distToFocus);
+  Image image(width, height);
+  Scene scene(&image);
 
-    scene.init(&cam, ns);
-    scene.setupDemoScene(1);
-    scene.render();
+  scene.init(&cam, ns);
+  scene.setupDemoScene(1);
+  scene.render();
 
-    image.saveToBMP("res/output.bmp");
+  image.saveToBMP("res/output.bmp");
 
-    return 0;
+  return 0;
 }
